@@ -25,20 +25,37 @@ def project_root_dir() -> str:
 def terraform_cmd(op, tf_vars="") -> str:
     aws_cred = read_aws_cred()
     env = f"-e AWS_ACCESS_KEY_ID={aws_cred.aws_access_key_id} -e AWS_SECRET_ACCESS_KEY={aws_cred.aws_secret_access_key}"
+
+    ext = ""
+    if op == "apply":
+        ext = "-auto-approve"
+
     vol = f"-v {project_root_dir()}/terraform:/terraform"
     ver = "latest"
 
-    return f"docker run {env} {vol} hashicorp/terraform:{ver} -chdir=/terraform {op} {tf_vars}"
+    return f"docker run {env} {vol} hashicorp/terraform:{ver} -chdir=/terraform {op} {ext} {tf_vars}"
+
+
+def make_env(env) -> str:
+    if not env:
+        raise Exception("Deployment environment is not set")
+    return f"-var='environment={env}'"
 
 
 @task
-def terraform_init(c, docs=False):
+def terraform_init(c):
     c.run(terraform_cmd("init"))
 
 
 @task
-def terraform_apply(c, docs=False, env=None):
-    if not env:
-        raise Exception("Deployment environment is not set")
-    tf_vars = f"-var='environment={env}'"
-    c.run(terraform_cmd("apply", tf_vars))
+def terraform_apply(c, env=None):
+    tf_vars = f"{make_env(env)}"
+    cmd = terraform_cmd("apply", tf_vars)
+    c.run(cmd)
+
+
+@task
+def terraform_destroy(c, env=None):
+    tf_vars = f"{make_env(env)}'"
+    cmd = terraform_cmd("destroy", tf_vars)
+    c.run(cmd)

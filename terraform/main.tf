@@ -14,6 +14,7 @@ terraform {
 }
 
 locals {
+  root_project = "vajeh"
   project = "vajeh-infra"
   tier    = "infrastructure"
 }
