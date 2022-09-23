@@ -1,10 +1,9 @@
 locals {
   aws_policies = [
-    "AmazonS3ReadOnlyAccess",
+    "AmazonS3FullAccess",
     "IAMFullAccess",
-#    "AmazonS3FullAccess",
     "AmazonRoute53FullAccess",
-#    "AWSCertificateManagerFullAccess",
+    "AWSCertificateManagerFullAccess",
     "AmazonRoute53FullAccess",
   ]
 }
