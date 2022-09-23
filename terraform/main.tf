@@ -16,7 +16,12 @@ terraform {
 locals {
   root_project = "vajeh"
   project = "vajeh-infra"
+  environment = "prod"
   tier    = "infrastructure"
+}
+
+locals {
+  root_domain = "artronics.me.uk"
 }
 
 provider "aws" {
@@ -25,7 +30,7 @@ provider "aws" {
   default_tags {
     tags = {
       project     = local.project
-      environment = var.environment
+      environment = local.environment
       tier        = local.tier
     }
   }
