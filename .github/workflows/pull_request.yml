@@ -32,7 +32,7 @@ jobs:
         run: terraform init
         working-directory: terraform
 
-      - name: Terraform apply
+      - name: Terraform plan
         run: |
-          terraform apply -auto-approve
+          terraform plan
         working-directory: terraform
