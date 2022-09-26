@@ -25,6 +25,5 @@ jobs:
         working-directory: terraform
 
       - name: Terraform apply
-        run: |
-          terraform apply -auto-approve
+        run: terraform apply -auto-approve -var='environment=dev'
         working-directory: terraform

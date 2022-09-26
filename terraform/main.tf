@@ -37,6 +37,26 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias  = "acm_provider"
+  alias = "main"
   region = "eu-west-2"
+
+  default_tags {
+    tags = {
+      project     = local.project
+      environment = local.environment
+      tier        = local.tier
+    }
+  }
+}
+
+provider "aws" {
+  alias  = "acm_provider"
+  region = "us-east-1"
+  default_tags {
+    tags = {
+      project     = local.project
+      environment = local.environment
+      tier        = local.tier
+    }
+  }
 }

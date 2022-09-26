@@ -1,4 +1,4 @@
-name: 'Deploy'
+name: 'Pull Request'
 
 on:
   push:
@@ -33,6 +33,5 @@ jobs:
         working-directory: terraform
 
       - name: Terraform plan
-        run: |
-          terraform plan
+        run: terraform plan -var='environment=dev'
         working-directory: terraform
