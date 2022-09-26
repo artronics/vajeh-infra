@@ -49,6 +49,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}:docker"
-          file: "{{defaultContext}}:docker/pipeline.Dockerfile"
+          file: "./docker/pipeline.Dockerfile"
           push: true
           tags: "user/app:latest, user/app:0.1.0-test"
