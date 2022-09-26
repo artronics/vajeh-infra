@@ -48,7 +48,7 @@ jobs:
       - name: Build and push pipeline image
         uses: docker/build-push-action@v3
         with:
-          context: docker
+          context: "./docker"
           file: docker/pipeline.Dockerfile
           push: true
           tags: "user/app:latest, user/app:0.1.0-test"
