@@ -28,6 +28,10 @@ jobs:
         run: terraform apply -auto-approve -var='environment=dev'
         working-directory: terraform
 
+  docker:
+    name: Docker
+    runs-on: ubuntu-latest
+    steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.40.0
         id: version
