@@ -51,4 +51,4 @@ jobs:
           context: docker
           file: docker/pipeline.Dockerfile
           push: true
-          tags: "user/pipeline:latest, user/pipeline:${{ steps.version.outputs.new_tag }}"
+          tags: "user/app:latest, user/app:${{ steps.version.outputs.new_tag }}"
