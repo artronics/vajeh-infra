@@ -2,6 +2,9 @@ locals {
   projects = [
     {
       name = "${local.root_project}-app"
+    },
+    {
+      name = "${local.root_project}-auth"
     }
   ]
 }
