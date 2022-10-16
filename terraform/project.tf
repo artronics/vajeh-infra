@@ -2,9 +2,11 @@ locals {
   projects = [
     {
       name = "${local.root_project}-app"
+      pipeline_existing_policies = []
     },
     {
       name = "${local.root_project}-auth"
+      pipeline_existing_policies = ["AmazonCognitoPowerUser"]
     }
   ]
 }
