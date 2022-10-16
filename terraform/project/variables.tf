@@ -1,10 +1,10 @@
 variable "project" {
   type = object({
     name = string,
-    pipeline_existing_policies = list(string)
+    aws_policies = set(string)
   })
 }
 
-variable "pipeline_group_name" {
-   type = string
+variable "default_aws_policies" {
+  type = set(string)
 }
