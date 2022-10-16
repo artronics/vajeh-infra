@@ -16,6 +16,7 @@ module "project" {
     aws.acm_provider = aws.acm_provider
   }
 
-  project = local.projects[0]
+  count = length(local.projects)
+  project = local.projects[count.index]
   pipeline_group_name = aws_iam_group.vajeh_infra_deployment.name
 }
