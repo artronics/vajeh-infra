@@ -1,6 +1,7 @@
 variable "project" {
   type = object({
     name = string,
+    pipeline_existing_policies = list(string)
   })
 }
 
