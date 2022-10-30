@@ -1,19 +1,23 @@
-locals {
-  project_groups = flatten(module.project[*].deployment_groups)
+variable "users" {
+  type = list(object({
+    username       = string,
+    short_username = string,
+    roles          = set(string)
+  }))
 }
 
+
 locals {
-  users = [
-    {
-      shortname = "jaho",
-      groups    = local.project_groups
-    }
-  ]
+  username_prefix = "${local.root_project}_"
 }
 
 module "users" {
-  source      = "./user"
-  count       = length(local.users)
-  name_prefix = "vajeh-user"
-  user        = local.users[count.index]
+  source          = "./user"
+  count           = length(var.users)
+  username_prefix = local.username_prefix
+  user            = var.users[count.index]
+}
+
+locals {
+  developers = [for dev in var.users : "${local.username_prefix}${dev.username}" if contains(dev.roles, "Developer")]
 }

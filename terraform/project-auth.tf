@@ -1,13 +1,19 @@
 locals {
-  root_auth_domain_name = "auth.${local.project_domain}"
+  auth_project_name = "auth"
 }
 
-# AWS Cognito needs a root record that is reachable. We just use a dummy IP address
-resource "aws_route53_record" "auth_root_domain_dummy" {
-  zone_id = aws_route53_zone.project_zone.zone_id
-  name    = local.root_auth_domain_name
-  type    = "A"
-  ttl     = 300
-  records = ["127.0.0.1"]  # Placeholder that is never used. See: https://stackoverflow.com/a/56429359/3943054
+module "auth_policies" {
+  source = "./policies"
+  root_project = local.root_project
+  project_name = local.auth_project_name
+  exclude_envs = var.permanent_environments
+  services = ["s3"]
 }
 
+locals {
+  auth_project = {
+    name       = local.auth_project_name
+    developers = local.developers
+    policies   = module.auth_policies.policies
+  }
+}

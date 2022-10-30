@@ -1,10 +1,16 @@
+variable "root_project" {}
+variable "permanent_environments" {
+  type = set(string)
+}
+
 variable "project" {
   type = object({
-    name = string,
-    aws_policies = set(string)
+    name = string
+    developers = set(string)
+    policies = set(string)
   })
 }
 
-variable "default_aws_policies" {
-  type = set(string)
+locals {
+  name_prefix = "${var.root_project}-${var.project.name}"
 }
