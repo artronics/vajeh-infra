@@ -20,10 +20,6 @@ locals {
   tier    = "infrastructure"
 }
 
-locals {
-  root_domain = "artronics.me.uk"
-}
-
 provider "aws" {
   region = "eu-west-2"
 

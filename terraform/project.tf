@@ -9,11 +9,39 @@ locals {
     },
     {
       name         = "${local.root_project}-app"
-      aws_policies = ["AWSCertificateManagerFullAccess","AmazonRoute53FullAccess"]
+      aws_policies = [
+        "AWSCertificateManagerFullAccess",
+        "AmazonRoute53FullAccess",
+        "AmazonCognitoPowerUser"
+      ]
     },
     {
       name         = "${local.root_project}-auth"
-      aws_policies = ["AmazonCognitoPowerUser"]
+      aws_policies = [
+        "AmazonCognitoPowerUser",
+        "AmazonRoute53FullAccess",
+        "AWSCertificateManagerFullAccess",
+        "CloudFrontFullAccess",
+        "SecretsManagerReadWrite",
+      ]
+    },
+    {
+      name         = "${local.root_project}-api"
+      aws_policies = [
+        "AmazonRoute53FullAccess",
+        "AWSCertificateManagerFullAccess",
+        "AWSAppSyncAdministrator",
+        "AWSAppSyncSchemaAuthor"
+      ]
+    },
+    {
+      name         = "${local.root_project}-user"
+      aws_policies = [
+        "AmazonEC2ContainerRegistryFullAccess",
+        "AWSLambda_FullAccess",
+        "AWSLambdaRole",
+        "SecretsManagerReadWrite",
+      ]
     }
   ]
 }
@@ -21,6 +49,7 @@ locals {
 locals {
   default_aws_policies = [
     "AmazonS3FullAccess",
+    "CloudWatchFullAccess",
   ]
 }
 
