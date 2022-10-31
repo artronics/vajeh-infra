@@ -6,8 +6,9 @@ module "auth_policies" {
   source = "./policies"
   root_project = local.root_project
   project_name = local.auth_project_name
-  exclude_envs = var.permanent_environments
-  services = ["s3"]
+  include_envs = var.permanent_environments
+  exclude_envs = ["*"]
+  services = ["s3", "secretmanager"]
 }
 
 locals {

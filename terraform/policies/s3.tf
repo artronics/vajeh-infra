@@ -10,7 +10,7 @@ resource "aws_iam_policy" "s3" {
           "Action" : [
             "s3:*"
           ],
-          "Resource" : ["arn:aws:s3:::${local.project_prefix}-*"]
+          "Resource" : [for e in var.include_envs : "arn:aws:s3:::${local.project_prefix}-${e}-*"]
         }, {
           "Effect" : "Deny",
           "Action" : [

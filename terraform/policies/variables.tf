@@ -5,6 +5,10 @@ locals {
   project_prefix = "${var.root_project}-${var.project_name}"
 }
 
-variable "exclude_envs" { type = set(string) }
+variable "exclude_envs" {
+  type    = set(string)
+  default = ["*"]
+}
+variable "include_envs" { type = set(string) }
 
 variable "services" { type = set(string) }

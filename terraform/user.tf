@@ -1,12 +1,3 @@
-variable "users" {
-  type = list(object({
-    username       = string,
-    short_username = string,
-    roles          = set(string)
-  }))
-}
-
-
 locals {
   username_prefix = "${local.root_project}_"
 }

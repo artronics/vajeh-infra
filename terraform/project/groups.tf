@@ -15,7 +15,7 @@ resource "aws_iam_user_group_membership" "add_developers" {
 
 resource "aws_iam_group_policy_attachment" "terraform_state_developer_attachment" {
   group      = aws_iam_group.project_developers_group.name
-  policy_arn = aws_iam_policy.terraform_state.arn
+  policy_arn = aws_iam_policy.developers_terraform_state.arn
 }
 
 resource "aws_iam_group_policy_attachment" "attach_policies_developer" {
@@ -30,7 +30,7 @@ resource "aws_iam_group" "project_pipeline_group" {
 
 resource "aws_iam_group_policy_attachment" "terraform_state_pipeline_attachment" {
   group      = aws_iam_group.project_pipeline_group.name
-  policy_arn = aws_iam_policy.terraform_state.arn
+  policy_arn = aws_iam_policy.pipeline_terraform_state.arn
 }
 
 resource "aws_iam_group_policy_attachment" "attach_policies_pipeline" {

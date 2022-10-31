@@ -1,13 +1,18 @@
 variable "root_project" {}
-variable "permanent_environments" {
-  type = set(string)
+
+variable "environments" {
+  type = object({
+    pr_environments = list(string)
+    developer_environments = list(string)
+    permanent_environments = list(string)
+  })
 }
 
 variable "project" {
   type = object({
-    name = string
+    name       = string
     developers = set(string)
-    policies = list(string)
+    policies   = list(string)
   })
 }
 
