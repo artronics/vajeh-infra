@@ -19,9 +19,9 @@ resource "aws_iam_group_policy_attachment" "terraform_state_developer_attachment
 }
 
 resource "aws_iam_group_policy_attachment" "attach_policies_developer" {
-  for_each = var.project.policies
+  count = length(var.project.policies)
   group      = aws_iam_group.project_developers_group.name
-  policy_arn = each.key
+  policy_arn = var.project.policies[count.index]
 }
 
 resource "aws_iam_group" "project_pipeline_group" {
@@ -34,7 +34,7 @@ resource "aws_iam_group_policy_attachment" "terraform_state_pipeline_attachment"
 }
 
 resource "aws_iam_group_policy_attachment" "attach_policies_pipeline" {
-  for_each = var.project.policies
+  count = length(var.project.policies)
   group      = aws_iam_group.project_pipeline_group.name
-  policy_arn = each.key
+  policy_arn = var.project.policies[count.index]
 }

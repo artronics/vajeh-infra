@@ -7,7 +7,7 @@ variable "project" {
   type = object({
     name = string
     developers = set(string)
-    policies = set(string)
+    policies = list(string)
   })
 }
 

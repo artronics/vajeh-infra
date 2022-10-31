@@ -8,15 +8,15 @@ terraform {
 
   backend "s3" {
     bucket = "terraform-vajeh-infra"
-    key    = "dev"
+    key    = "state"
     region = "eu-west-2"
   }
 }
 
 locals {
   root_project = "vajeh"
-  project = "vajeh-infra"
-  environment = "prod"
+  project = "infra"
+  environment = "ptl"
   tier    = "infrastructure"
 }
 
@@ -25,9 +25,9 @@ provider "aws" {
 
   default_tags {
     tags = {
-      project     = local.project
-      environment = local.environment
-      tier        = local.tier
+      Project     = local.project
+      Environment = local.environment
+      Tier        = local.tier
     }
   }
 }
@@ -38,9 +38,9 @@ provider "aws" {
 
   default_tags {
     tags = {
-      project     = local.project
-      environment = local.environment
-      tier        = local.tier
+      Project     = local.project
+      Environment = local.environment
+      Tier        = local.tier
     }
   }
 }
@@ -50,9 +50,9 @@ provider "aws" {
   region = "us-east-1"
   default_tags {
     tags = {
-      project     = local.project
-      environment = local.environment
-      tier        = local.tier
+      Project     = local.project
+      Environment = local.environment
+      Tier        = local.tier
     }
   }
 }
