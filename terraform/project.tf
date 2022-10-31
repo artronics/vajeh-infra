@@ -5,7 +5,7 @@ locals {
 }
 
 module "projects" {
-  depends_on   = [module.users, module.auth_policies]
+  depends_on   = [module.users, module.auth_developer_policies]
   source       = "./project"
   count        = length(local.projects)
   project      = local.projects[count.index]

@@ -2,7 +2,7 @@ variable "root_project" {}
 
 variable "environments" {
   type = object({
-    pr_environments = list(string)
+    pr_environments        = list(string)
     developer_environments = list(string)
     permanent_environments = list(string)
   })
@@ -10,9 +10,10 @@ variable "environments" {
 
 variable "project" {
   type = object({
-    name       = string
-    developers = set(string)
-    policies   = list(string)
+    name               = string
+    developers         = set(string)
+    developer_policies = list(string)
+    pipeline_policies  = list(string)
   })
 }
 

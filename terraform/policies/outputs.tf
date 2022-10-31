@@ -1,3 +1,3 @@
 output "policies" {
-  value = flatten(local.s3_polices)
+  value = concat(local.s3_polices, local.secretsmanager_polices)
 }

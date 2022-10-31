@@ -1,6 +1,8 @@
 variable "root_project" {}
 variable "project_name" {}
 
+variable "name_suffix" {}
+
 locals {
   project_prefix = "${var.root_project}-${var.project_name}"
 }

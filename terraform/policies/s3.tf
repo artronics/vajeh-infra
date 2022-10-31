@@ -1,6 +1,6 @@
 resource "aws_iam_policy" "s3" {
   count  = contains(var.services, "s3") ? 1 : 0
-  name   = "${local.project_prefix}-s3"
+  name   = "${var.name_suffix}-s3"
   policy = jsonencode(
     {
       "Version" : "2012-10-17",

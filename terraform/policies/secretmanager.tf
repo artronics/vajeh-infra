@@ -1,6 +1,6 @@
-resource "aws_iam_policy" "secretmanager" {
-  count  = contains(var.services, "secretmanager") ? 1 : 0
-  name   = "${local.project_prefix}-secretmanager"
+resource "aws_iam_policy" "secretsmanager" {
+  count  = contains(var.services, "secretsmanager") ? 1 : 0
+  name   = "${var.name_suffix}-secretsmanager"
   policy = jsonencode(
     {
       "Version" : "2012-10-17",
@@ -8,15 +8,15 @@ resource "aws_iam_policy" "secretmanager" {
         {
           "Effect" : "Allow",
           "Action" : [
-            "secretmanager:*"
+            "secretsmanager:*"
           ],
-          "Resource" : [for e in var.include_envs : "arn:aws:secretmanager:::${local.project_prefix}-${e}-*"]
+          "Resource" : [for e in var.include_envs : "arn:aws:secretsmanager:*:*:secret:${var.root_project}/${var.project_name}/${e}/*"]
         }, {
           "Effect" : "Deny",
           "Action" : [
-            "secretmanager:*"
+            "secretsmanager:*"
           ],
-          "Resource" : [for e in var.exclude_envs : "arn:aws:secretmanager:::${local.project_prefix}-${e}-*"]
+          "Resource" : [for e in var.exclude_envs : "arn:aws:secretsmanager:*:*:secret:${var.root_project}/${var.project_name}/${e}/*"]
         }
       ]
     }
@@ -24,5 +24,5 @@ resource "aws_iam_policy" "secretmanager" {
 }
 
 locals {
-  secretmanager_polices = aws_iam_policy.secretmanager.*.arn
+  secretsmanager_polices = aws_iam_policy.secretsmanager.*.arn
 }
