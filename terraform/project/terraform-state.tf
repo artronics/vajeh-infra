@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "terraform-${local.name_prefix}"
+  bucket = "${local.name_prefix}-terraform-state"
 }
 
 resource "aws_s3_bucket_versioning" "terraform_state_versioning" {

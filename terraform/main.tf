@@ -7,8 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    #    TODO: remove backup
-    bucket = "vajeh-infra-ptl-terraform-state-backup"
+    bucket = "vajeh-infra-ptl-terraform-state"
     key    = "state"
     region = "eu-west-2"
   }

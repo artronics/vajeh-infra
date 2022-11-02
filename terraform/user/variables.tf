@@ -1,8 +1,3 @@
-variable "username_prefix" {}
-locals {
-  name_prefix = var.username_prefix
-}
-
 variable "user" {
   type = object({
     username       = string
