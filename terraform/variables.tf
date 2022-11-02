@@ -1,3 +1,6 @@
+variable "aws_root_access_key" {}
+variable "aws_root_secret_key" {}
+
 variable "users" {
   type = list(object({
     username       = string,
@@ -24,7 +27,7 @@ locals {
 }
 
 locals {
-  root_domain = "artronics.me.uk"
+  root_domain = "vajeh.co.uk"
   project_domain = "${local.root_project}.${local.root_domain}"
 }
 

@@ -1,9 +1,10 @@
 data "aws_route53_zone" "root_zone" {
+  provider = aws.root
   name = local.root_domain
 }
 
 locals {
-  project_zone_name = "${local.root_project}.${data.aws_route53_zone.root_zone.name}"
+  project_zone_name = "ptl.${data.aws_route53_zone.root_zone.name}"
 }
 
 resource "aws_route53_zone" "project_zone" {
@@ -11,6 +12,8 @@ resource "aws_route53_zone" "project_zone" {
 }
 
 resource "aws_route53_record" "project_ns_record" {
+  provider = aws.root
+
   name    = local.project_zone_name
   type    = "NS"
   ttl     = 172800

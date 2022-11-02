@@ -7,7 +7,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraform-vajeh-infra"
+    #    TODO: remove backup
+    bucket = "vajeh-infra-ptl-terraform-state-backup"
     key    = "state"
     region = "eu-west-2"
   }
@@ -15,9 +16,9 @@ terraform {
 
 locals {
   root_project = "vajeh"
-  project = "infra"
-  environment = "ptl"
-  tier    = "infrastructure"
+  project      = "infra"
+  environment  = "ptl"
+  tier         = "infrastructure"
 }
 
 provider "aws" {
@@ -33,8 +34,10 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias = "main"
-  region = "eu-west-2"
+  alias      = "root"
+  region     = "eu-west-2"
+  access_key = var.aws_root_access_key
+  secret_key = var.aws_root_secret_key
 
   default_tags {
     tags = {
