@@ -1,5 +1,9 @@
-variable "aws_root_access_key" {}
-variable "aws_root_secret_key" {}
+variable "aws_root_access_key" {
+  sensitive=true
+}
+variable "aws_root_secret_key" {
+  sensitive=true
+}
 
 variable "users" {
   type = list(object({
@@ -28,6 +32,5 @@ locals {
 
 locals {
   root_domain = "vajeh.co.uk"
-  project_domain = "${local.root_project}.${local.root_domain}"
 }
 

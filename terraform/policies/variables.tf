@@ -1,3 +1,4 @@
+variable "account_id" {}
 variable "root_project" {}
 variable "project_name" {}
 

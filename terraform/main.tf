@@ -13,10 +13,15 @@ terraform {
   }
 }
 
+data "aws_caller_identity" "current" {}
+locals {
+  account_id = data.aws_caller_identity.current.account_id
+}
+
 locals {
   root_project = "vajeh"
   project      = "infra"
-  environment  = "ptl"
+  environment  = terraform.workspace
   tier         = "infrastructure"
 }
 

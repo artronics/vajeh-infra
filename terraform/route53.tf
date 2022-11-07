@@ -1,6 +1,6 @@
 data "aws_route53_zone" "root_zone" {
   provider = aws.root
-  name = local.root_domain
+  name = "vajeh.co.uk"
 }
 
 locals {

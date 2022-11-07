@@ -1,5 +1,9 @@
+locals {
+  state_bucket = "${local.name_prefix}-terraform-state"
+}
+
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "${local.name_prefix}-terraform-state"
+  bucket = local.state_bucket
 }
 
 resource "aws_s3_bucket_versioning" "terraform_state_versioning" {
@@ -23,7 +27,7 @@ resource "aws_iam_policy" "developers_terraform_state" {
         "Effect" : "Allow",
         "Action" : "s3:ListBucket",
         "Resource" : [
-          "arn:aws:s3:::terraform-${local.name_prefix}",
+          "arn:aws:s3:::${local.state_bucket}",
         ]
       },
       {
@@ -33,14 +37,14 @@ resource "aws_iam_policy" "developers_terraform_state" {
           "s3:DeleteObject",
         ],
         Effect : "Allow",
-        "Resource" : [ for e in local.dev_include_envs : "arn:aws:s3:::terraform-${local.name_prefix}/env:/${e}/*" ]
+        "Resource" : [ for e in local.dev_include_envs : "arn:aws:s3:::${local.state_bucket}/env:/${e}/*" ]
       },
       {
         Action : [
           "s3:*",
         ],
         Effect : "Deny",
-        "Resource" : [ for e in local.dev_exclude_envs : "arn:aws:s3:::terraform-${local.name_prefix}/env:/${e}/*" ]
+        "Resource" : [ for e in local.dev_exclude_envs : "arn:aws:s3:::${local.state_bucket}/env:/${e}/*" ]
       }
     ]
   })
@@ -60,7 +64,7 @@ resource "aws_iam_policy" "pipeline_terraform_state" {
         "Effect" : "Allow",
         "Action" : "s3:ListBucket",
         "Resource" : [
-          "arn:aws:s3:::terraform-${local.name_prefix}",
+          "arn:aws:s3:::${local.state_bucket}",
         ]
       },
       {
@@ -70,14 +74,14 @@ resource "aws_iam_policy" "pipeline_terraform_state" {
           "s3:DeleteObject",
         ],
         Effect : "Allow",
-        "Resource" : [ for e in local.pipeline_include_envs : "arn:aws:s3:::terraform-${local.name_prefix}/env:/${e}/*" ]
+        "Resource" : [ for e in local.pipeline_include_envs : "arn:aws:s3:::${local.state_bucket}/env:/${e}/*" ]
       },
       {
         Action : [
           "s3:*",
         ],
         Effect : "Deny",
-        "Resource" : [ for e in local.pipeline_exclude_envs : "arn:aws:s3:::terraform-${local.name_prefix}/env:/${e}/*" ]
+        "Resource" : [ for e in local.pipeline_exclude_envs : "arn:aws:s3:::${local.state_bucket}/env:/${e}/*" ]
       }
     ]
   })

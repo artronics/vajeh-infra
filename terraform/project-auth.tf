@@ -6,12 +6,13 @@ locals {
     name       = local.auth_project_name
     developer_envs = local.developers_environments
     suffix     = "${local.root_project}-${local.auth_project_name}"
-    services   = ["s3", "secretsmanager"]
+    services   = ["secretsmanager", "cognito:userpool"]
   }
 }
 
 module "auth_developer_policies" {
   source       = "./policies"
+  account_id = local.account_id
   root_project = local.root_project
   project_name = local.auth_project_conf.name
   services     = local.auth_project_conf.services
@@ -23,6 +24,7 @@ module "auth_developer_policies" {
 
 module "auth_pipeline_policies" {
   source       = "./policies"
+  account_id = local.account_id
   root_project = local.root_project
   project_name = local.auth_project_conf.name
   services     = local.auth_project_conf.services
@@ -40,3 +42,4 @@ locals {
     pipeline_policies  = module.auth_pipeline_policies.policies
   }
 }
+
