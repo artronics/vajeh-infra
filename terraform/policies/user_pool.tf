@@ -10,8 +10,8 @@ resource "aws_iam_policy" "cognito_userpool" {
       "Statement" : [
         {
           "Effect" : "Allow",
-          "Action" : "cognito-ipd:*",
-          "Resource" : "arn:aws:cognito-ipd:*:*:userpool/*"
+          "Action" : "cognito-idp:*",
+          "Resource" : "*"
         }
       ]
     }
