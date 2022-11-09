@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  release-ptl:
+  release_ptl:
     name: Release ptl
     environment:
       name: ptl
@@ -34,14 +34,14 @@ jobs:
           ROOT_AWS_ACCESS_KEY_ID: ${{ secrets.ROOT_AWS_ACCESS_KEY_ID }}
           ROOT_AWS_SECRET_ACCESS_KEY: ${{ secrets.ROOT_AWS_SECRET_ACCESS_KEY }}
         run: |
-          ./vajeh deploy --workspace ${{ jobs.release.environment }} --workdir terraform --vars "root_aws_access_key_id:$ROOT_AWS_ACCESS_KEY_ID root_aws_secret_access_key:$ROOT_AWS_SECRET_ACCESS_KEY"
+          ./vajeh deploy --workspace ${{ jobs.release_ptl.environment }} --workdir terraform --vars "root_aws_access_key_id:$ROOT_AWS_ACCESS_KEY_ID root_aws_secret_access_key:$ROOT_AWS_SECRET_ACCESS_KEY"
 
-  release-live:
+  release_live:
     name: Release live
     environment:
       name: live
     runs-on: ubuntu-latest
-    needs: [release-ptl]
+    needs: [release_ptl]
     timeout-minutes: 7
     steps:
       - name: Checkout
@@ -65,4 +65,4 @@ jobs:
           ROOT_AWS_ACCESS_KEY_ID: ${{ secrets.ROOT_AWS_ACCESS_KEY_ID }}
           ROOT_AWS_SECRET_ACCESS_KEY: ${{ secrets.ROOT_AWS_SECRET_ACCESS_KEY }}
         run: |
-          ./vajeh deploy --workspace ${{ jobs.release.environment }} --workdir terraform --vars "root_aws_access_key_id:$ROOT_AWS_ACCESS_KEY_ID root_aws_secret_access_key:$ROOT_AWS_SECRET_ACCESS_KEY"
+          ./vajeh deploy --workspace ${{ jobs.release_live.environment }} --workdir terraform --vars "root_aws_access_key_id:$ROOT_AWS_ACCESS_KEY_ID root_aws_secret_access_key:$ROOT_AWS_SECRET_ACCESS_KEY"
