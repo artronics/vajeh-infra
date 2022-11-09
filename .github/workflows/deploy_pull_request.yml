@@ -33,5 +33,5 @@ jobs:
           ROOT_AWS_ACCESS_KEY_ID: ${{ secrets.ROOT_AWS_ACCESS_KEY_ID }}
           ROOT_AWS_SECRET_ACCESS_KEY: ${{ secrets.ROOT_AWS_SECRET_ACCESS_KEY }}
         run: |
-          ./vajeh deploy --dryrun --workspace dev --workdir terraform --vars "root_aws_access_key_id:$ROOT_AWS_ACCESS_KEY_ID root_aws_secret_access_key:$ROOT_AWS_SECRET_ACCESS_KEY"
+          ./vajeh deploy --dryrun --workspace ptl --workdir terraform --vars "root_aws_access_key_id:$ROOT_AWS_ACCESS_KEY_ID root_aws_secret_access_key:$ROOT_AWS_SECRET_ACCESS_KEY"
 
