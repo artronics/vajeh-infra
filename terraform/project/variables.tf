@@ -1,10 +1,22 @@
-variable "project" {
+variable "root_project" {}
+
+variable "environments" {
   type = object({
-    name = string,
-    aws_policies = set(string)
+    pr_environments        = list(string)
+    developer_environments = list(string)
+    permanent_environments = list(string)
   })
 }
 
-variable "default_aws_policies" {
-  type = set(string)
+variable "project" {
+  type = object({
+    name               = string
+    developers         = set(string)
+    developer_policies = list(string)
+    pipeline_policies  = list(string)
+  })
+}
+
+locals {
+  name_prefix = "${var.root_project}-${var.project.name}"
 }

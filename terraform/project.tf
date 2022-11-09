@@ -1,37 +1,18 @@
 locals {
   projects = [
-    {
-      name         = "${local.root_project}-infra"
-      aws_policies = [
-        "IAMFullAccess",
-        "AmazonRoute53FullAccess",
-      ]
-    },
-    {
-      name         = "${local.root_project}-app"
-      aws_policies = ["AWSCertificateManagerFullAccess","AmazonRoute53FullAccess"]
-    },
-    {
-      name         = "${local.root_project}-auth"
-      aws_policies = ["AmazonCognitoPowerUser"]
-    }
+    local.auth_project,
   ]
 }
 
-locals {
-  default_aws_policies = [
-    "AmazonS3FullAccess",
-  ]
-}
-
-module "project" {
-  source    = "./project"
-  providers = {
-    aws.main         = aws.main
-    aws.acm_provider = aws.acm_provider
+module "projects" {
+  depends_on   = [module.users, module.auth_developer_policies]
+  source       = "./project"
+  count        = length(local.projects)
+  project      = local.projects[count.index]
+  root_project = local.root_project
+  environments = {
+    pr_environments        = var.pr_environments,
+    developer_environments = local.developers_environments
+    permanent_environments = var.permanent_environments
   }
-
-  count                = length(local.projects)
-  project              = local.projects[count.index]
-  default_aws_policies = local.default_aws_policies
 }

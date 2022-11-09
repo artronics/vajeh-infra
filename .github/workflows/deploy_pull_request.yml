@@ -1,0 +1,37 @@
+name: 'Pull Request'
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  deploy-pr:
+    name: Deploy PR
+    environment:
+      name: ptl
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache terraform
+        uses: actions/cache@v3
+        with:
+          key: terraform-${{ hashFiles('terraform/.terraform.lock.hcl') }}
+          path: terraform/.terraform
+
+      - name: Download and install vajeh
+        run: |
+          curl -Ls https://github.com/artronics/vajeh-cli/releases/latest/download/vajeh-cli --output vajeh
+          chmod +x vajeh
+
+      - name: Deploy PR
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          ROOT_AWS_ACCESS_KEY_ID: ${{ secrets.ROOT_AWS_ACCESS_KEY_ID }}
+          ROOT_AWS_SECRET_ACCESS_KEY: ${{ secrets.ROOT_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          ./vajeh deploy --dryrun --workspace dev --workdir terraform --vars "root_aws_access_key_id:$ROOT_AWS_ACCESS_KEY_ID root_aws_secret_access_key:$ROOT_AWS_SECRET_ACCESS_KEY"
+
