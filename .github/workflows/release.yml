@@ -1,15 +1,14 @@
-name: 'Pull Request'
+name: 'Release'
 
 on:
-  pull_request:
-    types: [opened, reopened, synchronize]
+  push:
+    branches:
+      - master
 
 jobs:
-  deploy-pr:
-    name: Deploy PR
+  release:
+    name: Deploy
     runs-on: ubuntu-latest
-    environment:
-      name: ptl
     timeout-minutes: 7
     steps:
       - name: Checkout
@@ -30,8 +29,5 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          ROOT_AWS_ACCESS_KEY_ID: ${{ secrets.ROOT_AWS_ACCESS_KEY_ID }}
-          ROOT_AWS_SECRET_ACCESS_KEY: ${{ secrets.ROOT_AWS_SECRET_ACCESS_KEY }}
         run: |
-          ./vajeh deploy --dryrun --workspace dev --workdir terraform --vars "$ROOT_AWS_ACCESS_KEY_ID:root_aws_access_key_id $ROOT_AWS_SECRET_ACCESS_KEY:root_aws_secret_access_key"
-
+          ./vajeh deploy --workspace dev --workdir terraform

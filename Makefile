@@ -24,6 +24,6 @@ tf-ws:
 	terraform -chdir=terraform workspace $(opt)
 
 aws_cred = AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)
-root_aws_cred = "aws_root_access_key:$(ROOT_AWS_ACCESS_KEY_ID) aws_root_secret_key:$(ROOT_AWS_SECRET_ACCESS_KEY)"
+root_aws_cred = "root_aws_access_key:$(ROOT_AWS_ACCESS_KEY_ID) root_aws_secret_key:$(ROOT_AWS_SECRET_ACCESS_KEY)"
 apply:
 	$(aws_cred) vajeh deploy --workspace ptl --vars $(root_aws_cred)

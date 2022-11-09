@@ -40,8 +40,8 @@ provider "aws" {
 provider "aws" {
   alias      = "root"
   region     = "eu-west-2"
-  access_key = var.aws_root_access_key
-  secret_key = var.aws_root_secret_key
+  access_key = var.root_aws_access_key
+  secret_key = var.root_aws_secret_key
 
   default_tags {
     tags = {
