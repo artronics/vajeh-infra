@@ -7,9 +7,9 @@ on:
 jobs:
   deploy-pr:
     name: Deploy PR
-    runs-on: ubuntu-latest
     environment:
       name: ptl
+    runs-on: ubuntu-latest
     timeout-minutes: 7
     steps:
       - name: Checkout
