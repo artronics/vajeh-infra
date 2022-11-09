@@ -1,7 +1,7 @@
-variable "root_aws_access_key" {
+variable "root_aws_access_key_id" {
   sensitive=true
 }
-variable "root_aws_secret_key" {
+variable "root_aws_secret_access_key" {
   sensitive=true
 }
 
