@@ -13,8 +13,8 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      ROOT_AWS_ACCESS_KEY_ID: ${{ secrets.ROOT_AWS_ACCESS_KEY_ID }}
-      ROOT_AWS_SECRET_ACCESS_KEY: ${{ secrets.ROOT_AWS_SECRET_ACCESS_KEY }}
+      TF_VAR_root_aws_access_key_id: ${{ secrets.ROOT_AWS_ACCESS_KEY_ID }}
+      TF_VAR_root_aws_secret_access_key: ${{ secrets.ROOT_AWS_SECRET_ACCESS_KEY }}
       TF_VAR_project: vajeh-infra
       TF_VAR_account_zone: ptl
     steps:
