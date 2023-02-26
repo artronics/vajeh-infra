@@ -34,7 +34,7 @@ jobs:
           restore-keys: ${{ runner.os }}-terraform-
 
       - name: Deploy - init
-        run: terraform -chdir=terraform init -backend-config="bucket=vajeh-infra-${{ env.TF_VAR_account_zone }}-terraform-state"
+        run: terraform -chdir=terraform init -backend-config="bucket=vajeh-infra-${{ env.TF_VAR_account_name }}-terraform-state"
 
       - name: Deploy - apply
         uses: nick-fields/retry@v2
