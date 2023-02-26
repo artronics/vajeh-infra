@@ -7,22 +7,14 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "vajeh-infra-ptl-terraform-state"
     key    = "state"
     region = "eu-west-2"
   }
 }
 
-data "aws_caller_identity" "current" {}
 locals {
-  account_id = data.aws_caller_identity.current.account_id
-}
-
-locals {
-  root_project = "vajeh"
-  project      = "infra"
-  environment  = terraform.workspace
-  tier         = "infrastructure"
+  tier          = "infra"
+  workspace     = "infra"
 }
 
 provider "aws" {
@@ -30,9 +22,9 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = local.project
-      Environment = local.environment
-      Tier        = local.tier
+      Workspace = local.workspace
+      Project   = var.project
+      Tier      = local.tier
     }
   }
 }
@@ -45,9 +37,22 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = local.project
-      Environment = local.environment
-      Tier        = local.tier
+      Workspace = local.workspace
+      Project   = var.project
+      Tier      = local.tier
+    }
+  }
+}
+
+provider "aws" {
+  alias  = "ptl"
+  region = "eu-west-2"
+
+  default_tags {
+    tags = {
+      Workspace = local.workspace
+      Project   = var.project
+      Tier      = local.tier
     }
   }
 }
@@ -57,9 +62,9 @@ provider "aws" {
   region = "us-east-1"
   default_tags {
     tags = {
-      Project     = local.project
-      Environment = local.environment
-      Tier        = local.tier
+      Workspace = local.workspace
+      Project   = var.project
+      Tier      = local.tier
     }
   }
 }

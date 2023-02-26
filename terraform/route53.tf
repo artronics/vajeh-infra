@@ -8,6 +8,7 @@ locals {
 }
 
 resource "aws_route53_zone" "project_zone" {
+  provider = aws.ptl
   name = local.project_zone_name
 }
 

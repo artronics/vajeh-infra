@@ -1,4 +1,8 @@
 .idea
-.venv
 .env
-.terraform
+.venv
+project.private.env.json
+build
+http/*private*
+**/.terraform
+**/out
