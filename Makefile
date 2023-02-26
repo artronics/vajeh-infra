@@ -13,7 +13,7 @@ apply:
 	$(tf) apply -auto-approve
 
 lock-provider:
-	invoke lock-provider
+	$(tf) providers lock -platform=darwin_arm64 -platform=darwin_amd64 -platform=linux_amd64 -platform=windows_amd64
 
 clean:
 	rm -rf build terraform/.terraform terraform/out
