@@ -1,7 +1,7 @@
 # NOTE: source .env file before running targets
 BUILDDIR = build
 
-tf = TF_VAR_project=vajeh-infra TF_VAR_account_zone=ptl terraform -chdir=terraform
+tf = TF_VAR_project=vajeh-infra TF_VAR_account_name=ptl terraform -chdir=terraform
 
 init:
 	$(tf) init

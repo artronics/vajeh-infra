@@ -4,7 +4,7 @@ data "aws_route53_zone" "root_zone" {
 }
 
 locals {
-  project_zone_name = "ptl.${data.aws_route53_zone.root_zone.name}"
+  project_zone_name = "${var.account_name}.${data.aws_route53_zone.root_zone.name}"
 }
 
 resource "aws_route53_zone" "project_zone" {

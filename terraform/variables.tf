@@ -2,8 +2,8 @@ variable "project" {
   description = "Project name. It should be the same as repo name. The value comes from PROJECT in .env file."
 }
 
-variable "account_zone" {
-  description = "It's the root zone name of the account"
+variable "account_name" {
+  description = "Account name; ptl or live"
 }
 
 variable "root_aws_access_key_id" {
