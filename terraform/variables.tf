@@ -7,25 +7,10 @@ variable "account_name" {
 }
 
 variable "root_aws_access_key_id" {
-  sensitive=true
+  sensitive = true
 }
+
 variable "root_aws_secret_access_key" {
-  sensitive=true
-}
-
-variable "permanent_environments" {
-  default = ["dev"]
-}
-
-variable "pr_environments" {
-  default = ["pr*"]
-}
-
-variable "ptl_environments" {
-  default = ["ptl"]
-}
-
-locals {
-  root_domain = "vajeh.co.uk"
+  sensitive = true
 }
 

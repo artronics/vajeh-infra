@@ -1,5 +1,2 @@
 variable "account_name" {}
-
-locals {
-  vpc_cidr = "10.0.0.0/16"
-}
+variable "vpc_cidr" {}
