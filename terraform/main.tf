@@ -13,8 +13,9 @@ terraform {
 }
 
 locals {
-  tier          = "infra"
-  workspace     = "infra"
+  prefix    = var.project
+  tier      = "infra"
+  workspace = "infra"
 }
 
 provider "aws" {
