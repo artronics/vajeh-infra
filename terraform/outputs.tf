@@ -14,6 +14,10 @@ output "platform_subnet_ids" {
   value = module.network.platform_subnet_ids
 }
 
+output "platform_efs_id" {
+  value = aws_efs_file_system.platform_storage.id
+}
+
 output "terraform_plugin_cache_efs_access_point" {
   value = aws_efs_access_point.terraform_plugin_cache_efs_access_point.arn
 }

@@ -15,7 +15,7 @@ resource "aws_efs_access_point" "terraform_plugin_cache_efs_access_point" {
   file_system_id = aws_efs_file_system.platform_storage.id
 
   root_directory {
-    path = "/terraform-plugin-cache"
+    path = "/platform"
     creation_info {
       owner_gid   = 0
       owner_uid   = 0
@@ -29,7 +29,7 @@ resource "aws_efs_access_point" "terraform_plugin_cache_efs_access_point" {
   }
 
   tags = {
-    Name = "terraform-plugin-cache"
+    Name = "platform"
   }
 }
 
